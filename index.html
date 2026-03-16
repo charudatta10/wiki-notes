@@ -757,7 +757,7 @@
         // Click → navigate into docs (uses browserRouter-aware path)
         cy.on('tap', 'node', evt => {
           const id   = evt.target.id();
-          const path = config.browserRouter ? `/${id}` : `${config.sitePath}#/${id}`;
+          const path = config.browserRouter ? `/${id}` : `${config.sitePath}${id}`;
           graphPanel.classList.remove('open');
           window.history.pushState({}, '', path);
           loadContent();
