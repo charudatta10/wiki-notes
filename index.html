@@ -2,462 +2,781 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="icon" href="docs/logo.svg">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="docs/logo.svg">
+  <title>Knowledge Base</title>
+  <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@5.1.1/marked.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <!-- USER CONFIG -->
 <script>
-	const config = {
-		sitePath: "/",
-		browserRouter: true,
-		name: "Knowledge Base",
-		components: [],
-		footers: [],
-	};
+  const config = {
+    sitePath: "/",
+    browserRouter: true,
+    name: "Knowledge Base",
+    components: [],
+    footers: [],
+  };
 </script>
 
 <style>
-	* {
-		scroll-margin-top: 5rem;
-	}
+  /* ─── Reset ─────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
 
-	#docs-github p {
-		margin: 0;
-	}
+  * { scroll-margin-top: 5rem; }
 
-	#docs-navbar {
-		width: 100%;
-		background-color: var(--color-1);
-		color: white;
-		margin: 0;
-		position: fixed;
-		box-shadow: 0px 0px 16px #00000047;
-		padding-left: 2rem;
-		z-index: 5;
-	}
+  /* ─── Theme tokens ───────────────────────────────────── */
+  :root {
+    --text-color: #313f47;
+    --border-color: #dddddd;
+    --background-color: white;
+    --darker-background-color: #0000000a;
+    --lighter-background-color: #fcfcfc;
+    --color-1: #4285f4;
+    --color-2: #db4437;
+    --color-3: #f4b400;
+    --color-4: #0f9d58;
+    --border-radius: 7px;
+  }
 
-	#docs-navbar>ul>li>a>img {
-		border-radius: var(--border-radius);
-		margin: -1em 0;
-		vertical-align: super;
-		margin-right: 0.5em;
-		max-height: 2em;
-		width: 2rem;
-	}
+  [data-theme="dark"] {
+    --text-color: #adbac7;
+    --border-color: #373e47;
+    --background-color: #22272e;
+    --darker-background-color: rgba(99,110,123,0.4);
+    --lighter-background-color: rgba(99,110,123,0.1);
+  }
 
-	#docs-navbar ul {
-		display: flex;
-		gap: 1rem;
-		list-style: none;
-		margin: 0;
-		border-radius: inherit;
-		background: inherit;
-		border: none;
-	}
+  /* ─── Base ───────────────────────────────────────────── */
+  body {
+    color: var(--text-color);
+    font-family: "Open Sans", Helvetica, sans-serif;
+    margin: 0; padding: 0;
+    background-color: var(--background-color);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  body.loaded { opacity: 1; }
 
-	#docs-navbar li {
-		margin: 1.4rem 0rem;
-		padding: inherit;
-		border: none;
-	}
+  h1, h2, h3, h4, h5 { padding-bottom: 0.3em; }
+  h1, h2 { border-bottom: 1px solid var(--border-color); }
 
-	#docs-navbar li::before {
-		content: none;
-	}
+  a { text-decoration: none; color: var(--color-1); }
+  blockquote a { color: #92d3ff; }
+  a:hover { text-decoration: underline; }
 
-	#docs-navbar a {
-		text-decoration: none;
-		padding: 0.9em 1.1em;
-		color: white;
-		font-weight: bold;
-	}
+  hr { border: none; border-bottom: 1px solid var(--border-color); }
+  img { max-height: 20em; border-radius: var(--border-radius); }
 
-	#docs-navbar a:hover {
-		background-color: #ffffff14;
-		border-radius: var(--border-radius);
-	}
+  #content {
+    max-width: 50rem;
+    padding: 5rem 1rem;
+    margin: auto;
+    padding-top: 5em;
+  }
 
-	#docs-footer {
-		text-align: center;
-		background-color: var(--color-1);
-		color: white;
-		padding: 1rem;
-	}
+  :not(pre)>code {
+    background: var(--darker-background-color);
+    border-radius: var(--border-radius);
+    padding: 0.2em 0.4em;
+  }
 
-	#docs-footer a {
-		color: white;
-		text-decoration: underline;
-	}
-</style>
+  pre {
+    background: var(--darker-background-color);
+    padding: 1.6em !important;
+    overflow: auto;
+    margin-bottom: 1em;
+    border-radius: var(--border-radius);
+  }
 
-<!-- Marked.js - Markdown renderer -->
-<script src="https://cdn.jsdelivr.net/npm/marked@5.1.1/marked.min.js"></script>
+  blockquote {
+    margin: 0;
+    padding: 1em 2em !important;
+    background: #4285f4;
+    color: white;
+    overflow: auto;
+    border-radius: var(--border-radius);
+  }
 
-<!-- OPTIONAL : Highlight.js - Syntax Highlighting -->
-<!--
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-dark.min.css">
--->
+  table {
+    border-collapse: collapse;
+    margin: 2em 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 20em;
+    border-radius: var(--border-radius);
+    overflow: auto;
+    display: block;
+  }
+  table thead tr { background-color: var(--color-1); color: #fff; text-align: left; }
+  table th, table td { padding: 0.8em 1.2em; }
+  table tbody tr:nth-of-type(odd)  { background-color: var(--darker-background-color); }
+  table tbody tr:nth-of-type(even) { background-color: var(--lighter-background-color); }
+  table tbody tr.active-row { font-weight: bold; color: var(--color-1); }
 
-<style>
-	:root {
-		--text-color: #313f47;
-		--border-color: #dddddd;
-		--background-color: white;
-		--darker-background-color: #0000000a;
-		--lighter-background-color: #fcfcfc;
-		--color-1: #4285f4;
-		--color-2: #db4437;
-		--color-3: #f4b400;
-		--color-4: #0f9d58;
-		--border-radius: 7px;
-	}
+  ul {
+    padding-inline-start: 0;
+    list-style: none;
+    background-color: var(--lighter-background-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--darker-background-color);
+    padding: 0;
+  }
+  li { padding: 0.9em; border-bottom: 1px solid var(--darker-background-color); }
+  li:last-of-type { border: none; }
+  ul ul {
+    border: none;
+    margin: 1em -0.9em -0.9em -0.9em;
+    border-top: 1px solid var(--darker-background-color);
+    border-radius: 0;
+  }
+  ul ul li { padding-left: 4em; }
+  ul:not(.checklist) li::before { content: "-"; margin-right: 0.7em; color: var(--border-color); }
 
-	[data-theme="dark"] {
-		--text-color: #adbac7;
-		--border-color: #373e47;
-		--background-color: #22272e;
-		--darker-background-color: rgba(99, 110, 123, 0.4);
-		--lighter-background-color: rgba(99, 110, 123, 0.1);
-	}
+  .checklist input[type="checkbox"] {
+    pointer-events: none;
+    margin-right: 1em;
+    height: 1.2em; width: 1.2em;
+    vertical-align: top;
+    appearance: none;
+    background: var(--darker-background-color);
+    border-radius: 2px;
+  }
+  .checklist input[type="checkbox"]:checked { appearance: auto; background: inherit; }
 
-	body {
-		color: var(--text-color);
-		font-family: "Open Sans", Helvetica, sans-serif;
-		margin: 0;
-		padding: 0;
-		background-color: var(--background-color);
-		opacity: 0;
-		transition: opacity 0.3s;
-	}
+  button, .button {
+    padding: 1rem 2em;
+    background: #4285f4;
+    color: white;
+    overflow: auto;
+    border-radius: var(--border-radius);
+    border: none;
+    transition: opacity 0.3s;
+    cursor: pointer;
+  }
+  button:hover, .button:hover { text-decoration: none; opacity: 0.9; }
 
-	body.loaded {
-		opacity: 1;
-	}
+  /* ─── Navbar ─────────────────────────────────────────── */
+  #docs-github p { margin: 0; }
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5 {
-		padding-bottom: 0.3em;
-	}
+  #docs-navbar {
+    width: 100%;
+    background-color: var(--color-1);
+    color: white;
+    margin: 0;
+    position: fixed;
+    box-shadow: 0px 0px 16px #00000047;
+    padding-left: 2rem;
+    z-index: 5;
+  }
+  #docs-navbar>ul>li>a>img {
+    border-radius: var(--border-radius);
+    margin: -1em 0;
+    vertical-align: super;
+    margin-right: 0.5em;
+    max-height: 2em;
+    width: 2rem;
+  }
+  #docs-navbar ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    border-radius: inherit;
+    background: inherit;
+    border: none;
+  }
+  #docs-navbar li { margin: 1.4rem 0; padding: inherit; border: none; }
+  #docs-navbar li::before { content: none; }
+  #docs-navbar a {
+    text-decoration: none;
+    padding: 0.9em 1.1em;
+    color: white;
+    font-weight: bold;
+  }
+  #docs-navbar a:hover { background-color: #ffffff14; border-radius: var(--border-radius); }
 
-	h1,
-	h2 {
-		border-bottom: 1px solid var(--border-color);
-	}
+  /* ─── Footer ─────────────────────────────────────────── */
+  #docs-footer {
+    text-align: center;
+    background-color: var(--color-1);
+    color: white;
+    padding: 1rem;
+  }
+  #docs-footer a { color: white; text-decoration: underline; }
 
-	a {
-		text-decoration: none;
-		color: var(--color-1);
-	}
+  /* ─── Graph toggle button ────────────────────────────── */
+  #graph-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 5rem;   /* sits left of graph controls when panel open */
+    z-index: 200;
+    padding: 0.5rem 1rem;
+    background: rgba(10,10,15,0.92);
+    border: 1px solid rgba(249,115,22,0.45);
+    border-radius: 8px;
+    color: #f97316;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+    box-shadow: 0 0 12px rgba(249,115,22,0.2);
+  }
+  #graph-toggle:hover {
+    background: rgba(249,115,22,0.15);
+    box-shadow: 0 0 20px rgba(249,115,22,0.35);
+  }
 
-	blockquote a {
-		color: #92d3ff;
-	}
+  /* ─── Graph overlay panel ────────────────────────────── */
+  #graph-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    font-family: 'JetBrains Mono', monospace;
+    background: #0a0a0f;
+    color: #c9d1d9;
+  }
+  #graph-panel.open { display: flex; }
 
-	a:hover {
-		text-decoration: underline;
-	}
+  /* subtle grid */
+  #graph-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-	hr {
-		border: none;
-		border-bottom: 1px solid var(--border-color);
-	}
+  #graph-header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(10,10,15,0.9);
+    backdrop-filter: blur(8px);
+  }
 
-	img {
-		max-height: 20em;
-		border-radius: var(--border-radius);
-	}
+  .graph-header-left { display: flex; align-items: center; gap: 0.75rem; }
 
-	#content {
-		max-width: 50rem;
-		padding: 5rem 1rem;
-		margin: auto;
-		padding-top: 5em;
-	}
+  .logo-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #f97316;
+    box-shadow: 0 0 10px #f97316aa;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 8px #f97316aa; }
+    50%       { box-shadow: 0 0 20px #f97316cc, 0 0 40px #f9731644; }
+  }
 
-	:not(pre)>code {
-		background: var(--darker-background-color);
-		border-radius: var(--border-radius);
-		padding: 0.2em 0.4em;
-	}
+  #graph-header h2 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+    border: none;
+    padding: 0; margin: 0;
+  }
 
-	pre {
-		background: var(--darker-background-color);
-		padding: 1.6em !important;
-		overflow: auto;
-		padding: calc(0.75em);
-		margin-bottom: 1em;
-		border-radius: var(--border-radius);
-	}
+  .graph-stats {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.7rem;
+    color: #64748b;
+  }
+  .graph-stat span { color: #94a3b8; margin-left: 0.3rem; }
 
-	blockquote {
-		margin: 0;
-		padding: 1em 2em !important;
-		background: #4285f4;
-		color: white;
-		overflow: auto;
-		border-radius: var(--border-radius);
-	}
+  #graph-close {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    color: #64748b;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  #graph-close:hover { border-color: rgba(249,115,22,0.4); color: #f97316; background: rgba(249,115,22,0.08); }
 
-	table {
-		border-collapse: collapse;
-		margin: 2em 0;
-		font-size: 0.9em;
-		font-family: sans-serif;
-		min-width: 20em;
-		border-radius: var(--border-radius);
-		overflow: auto;
-		display: block;
-	}
+  #foam-graph {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+  }
 
-	table thead tr {
-		background-color: var(--color-1);
-		color: #ffffff;
-		text-align: left;
-	}
+  /* Tooltip */
+  #graph-tooltip {
+    position: fixed;
+    background: rgba(15,15,25,0.95);
+    border: 1px solid rgba(249,115,22,0.4);
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.72rem;
+    color: #e2e8f0;
+    pointer-events: none;
+    display: none;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    max-width: 200px;
+  }
+  #graph-tooltip .tip-id   { font-weight: 600; color: #f97316; margin-bottom: 0.25rem; }
+  #graph-tooltip .tip-meta { color: #64748b; font-size: 0.65rem; }
 
-	table th,
-	table td {
-		padding: 0.8em 1.2em;
-	}
+  /* Legend */
+  #graph-legend {
+    position: absolute;
+    bottom: 1.5rem; left: 1.5rem;
+    z-index: 10;
+    background: rgba(10,10,15,0.85);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.65rem;
+    color: #64748b;
+    backdrop-filter: blur(8px);
+  }
+  .legend-title {
+    font-weight: 600; color: #94a3b8;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+  }
+  .legend-row   { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
+  .legend-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-	table tbody tr:nth-of-type(odd) {
-		background-color: var(--darker-background-color);
-	}
+  /* Controls */
+  #graph-controls {
+    position: absolute;
+    bottom: 1.5rem; right: 1.5rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .ctrl-btn {
+    width: 32px; height: 32px;
+    background: rgba(15,15,25,0.9);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    padding: 0;
+  }
+  .ctrl-btn:hover {
+    background: rgba(249,115,22,0.15);
+    border-color: rgba(249,115,22,0.4);
+    color: #f97316;
+  }
 
-	table tbody tr:nth-of-type(even) {
-		background-color: var(--lighter-background-color);
-	}
-
-	table tbody tr.active-row {
-		font-weight: bold;
-		color: var(--color-1);
-	}
-
-	ul {
-		padding-inline-start: 0;
-		list-style: none;
-		background-color: var(--lighter-background-color);
-		border-radius: var(--border-radius);
-		border: 1px solid var(--darker-background-color);
-		padding: 0;
-	}
-
-	li {
-		padding: 0.9em;
-		border-bottom: 1px solid var(--darker-background-color);
-	}
-
-	li:last-of-type {
-		border: none;
-	}
-
-	ul ul {
-		border: none;
-		margin: 1em -0.9em -0.9em -0.9em;
-		border-top: 1px solid var(--darker-background-color);
-		border-radius: 0;
-	}
-
-	ul ul li {
-		padding-left: 4em;
-	}
-
-	ul:not(.checklist) li::before {
-		content: "-";
-		margin-right: 0.7em;
-		color: var(--border-color);
-	}
-
-	.checklist input[type="checkbox"] {
-		pointer-events: none;
-		margin-right: 1em;
-		height: 1.2em;
-		width: 1.2em;
-		vertical-align: top;
-
-		appearance: none;
-		background: var(--darker-background-color);
-		border-radius: 2px;
-	}
-
-	.checklist input[type="checkbox"]:checked {
-		appearance: auto;
-		background: inherit;
-	}
-
-	button,
-	.button {
-		padding: 1rem 2em;
-		background: #4285f4;
-		color: white;
-		overflow: auto;
-		border-radius: var(--border-radius);
-		border: none;
-		transition: opacity 0.3s;
-		cursor: pointer;
-	}
-
-	button:hover,
-	.button:hover {
-		text-decoration: none;
-		opacity: 0.9;
-	}
+  /* Error state */
+  #graph-error {
+    display: none;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 20;
+    background: rgba(10,10,15,0.95);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+  }
+  .err-title { color: #ef4444; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .err-path  { color: #64748b; font-size: 0.65rem; word-break: break-all; }
 </style>
 
 <body>
-	<div id="components"></div>
-	<div id="content"></div>
-	<div id="footer"></div>
+  <!-- ── Docs site ─────────────────────────────────────── -->
+  <div id="components"></div>
+  <div id="content"></div>
+  <div id="footer"></div>
+
+  <!-- ── Graph toggle ──────────────────────────────────── -->
+  <button id="graph-toggle">⬡ Graph</button>
+
+  <!-- ── Graph overlay ─────────────────────────────────── -->
+  <div id="graph-panel">
+    <div id="graph-header">
+      <div class="graph-header-left">
+        <div class="logo-dot"></div>
+        <h2>Foam Knowledge Graph</h2>
+      </div>
+      <div class="graph-stats">
+        <div class="graph-stat">nodes <span id="stat-nodes">—</span></div>
+        <div class="graph-stat">edges <span id="stat-edges">—</span></div>
+        <div class="graph-stat">hub   <span id="stat-hub">—</span></div>
+      </div>
+      <button id="graph-close">✕ close</button>
+    </div>
+
+    <div id="foam-graph">
+      <div id="graph-error">
+        <div class="err-title">⚠ graph.json not found</div>
+        <div class="err-path" id="err-path"></div>
+      </div>
+    </div>
+
+    <div id="graph-legend">
+      <div class="legend-title">Connectivity</div>
+      <div class="legend-row"><div class="legend-dot" style="background:#fde047;box-shadow:0 0 6px #fde04766"></div> isolated (≤1)</div>
+      <div class="legend-row"><div class="legend-dot" style="background:#f97316;box-shadow:0 0 6px #f9731666"></div> connected (2–3)</div>
+      <div class="legend-row"><div class="legend-dot" style="background:#a855f7;box-shadow:0 0 6px #a855f766"></div> hub (4+)</div>
+    </div>
+
+    <div id="graph-controls">
+      <button class="ctrl-btn" id="btn-fit"      title="Fit to screen">⊡</button>
+      <button class="ctrl-btn" id="btn-zoom-in"  title="Zoom in">+</button>
+      <button class="ctrl-btn" id="btn-zoom-out" title="Zoom out">−</button>
+    </div>
+  </div>
+
+  <div id="graph-tooltip">
+    <div class="tip-id"   id="tip-id"></div>
+    <div class="tip-meta" id="tip-meta"></div>
+  </div>
 </body>
+
+<!-- ════════════════════════════════════════════════════════
+     Docs engine (from doc 1)
+═════════════════════════════════════════════════════════ -->
 <script>
-	const markedProps = {};
-	if (typeof hljs !== "undefined")
-		markedProps.highlight = (code) => hljs.highlightAuto(code).value;
+  const markedProps = {};
+  if (typeof hljs !== "undefined")
+    markedProps.highlight = (code) => hljs.highlightAuto(code).value;
 
-	let cwd = "";
-	config.contentPath = config.sitePath;
-	const contentDiv = document.getElementById("content");
-	const footersDiv = document.getElementById("footer");
-	const componentsDiv = document.getElementById("components");
-	if (!config.browserRouter) config.sitePath = config.sitePath + "#/";
+  let cwd = "";
+  config.contentPath = config.sitePath;
+  const contentDiv    = document.getElementById("content");
+  const footersDiv    = document.getElementById("footer");
+  const componentsDiv = document.getElementById("components");
+  if (!config.browserRouter) config.sitePath = config.sitePath + "#/";
 
-	// Rewrite relative URLs
-	marked.use({
-		walkTokens: (token) => {
-			if ("link" == token.type && !/^[a-z]*:\/\/*\b/.test(token.href)) {
-				token.href = cleanPath(config.sitePath + cwd + token.href);
+  marked.use({
+    walkTokens: (token) => {
+      if ("link" == token.type && !/^[a-z]*:\/\/*\b/.test(token.href)) {
+        token.href = cleanPath(config.sitePath + cwd + token.href);
+        token.href = token.href.split("/").reduce((a, v) => {
+          if (v === "."); else if (v === "..") a.pop(); else a.push(v);
+          return a;
+        }, []).join("/");
+        if (token.href == "") token.href = "/";
+      }
+    },
+  });
 
-				// Resolve paths
-				token.href = token.href
-					.split("/")
-					.reduce((a, v) => {
-						if (v === ".");
-						else if (v === "..") a.pop();
-						else a.push(v);
-						return a;
-					}, [])
-					.join("/");
-				if (token.href == "") token.href = "/";
-			}
-		},
-	});
-	marked.use({
-		extensions: [{
-			name: 'include',
-			level: 'inline',
-			start: (src) => src.indexOf("include("),
-			tokenizer(src) {
-				const match = /^include\((.*?)\)/.exec(src);
-				if (match) {
-					return {
-						type: 'include',
-						raw: match[0],
-						url: match[1],
-						html: '',
-					};
-				}
-			},
-			renderer: (token) => token.html,
-		}],
-		async: true,
-		async walkTokens(token) {
-			if (token.type === 'include') {
-				token.url = cwd + cleanPath(token.url)
-				token.html = await renderMD(token.url)
-			}
-		}
-	});
+  marked.use({
+    extensions: [{
+      name: 'include', level: 'inline',
+      start: (src) => src.indexOf("include("),
+      tokenizer(src) {
+        const match = /^include\((.*?)\)/.exec(src);
+        if (match) return { type: 'include', raw: match[0], url: match[1], html: '' };
+      },
+      renderer: (token) => token.html,
+    }],
+    async: true,
+    async walkTokens(token) {
+      if (token.type === 'include') {
+        token.url  = cwd + cleanPath(token.url);
+        token.html = await renderMD(token.url);
+      }
+    }
+  });
 
-	const renderMD = async (path) => {
-		if (path.indexOf("#") != -1) path = path.substr(0, path.lastIndexOf("#"));
-		if (path.slice(-1) == "/" || path == "") path += "README";
-		const res = await fetch(`${config.contentPath}${path}.md`);
-		if (res.status != 200) throw Error();
-		const markdown = await res.text();
-		if (markdown.startsWith("<!doctype html>")) throw Error();
-		return marked.parse(markdown, markedProps);
-	};
+  const renderMD = async (path) => {
+    if (path.indexOf("#") != -1) path = path.substr(0, path.lastIndexOf("#"));
+    if (path.slice(-1) == "/" || path == "") path += "README";
+    const res = await fetch(`${config.contentPath}${path}.md`);
+    if (res.status != 200) throw Error();
+    const markdown = await res.text();
+    if (markdown.startsWith("<!doctype html>")) throw Error();
+    return marked.parse(markdown, markedProps);
+  };
 
-	const loadComponent = async (element) => {
-		const html = await renderMD(element);
-		if (!html) return;
-		let div = document.createElement("div");
-		div.innerHTML = html;
-		div.id = element.replaceAll("/", "-");
-		componentsDiv.prepend(div);
-	};
+  const loadComponent = async (element) => {
+    const html = await renderMD(element);
+    if (!html) return;
+    let div = document.createElement("div");
+    div.innerHTML = html;
+    div.id = element.replaceAll("/", "-");
+    componentsDiv.prepend(div);
+  };
 
-	const cleanPath = (path) => {
-		if (path.slice(-3) == ".md") path = path.slice(0, -3);
-		if (path.endsWith("README")) path = path.slice(0, -6);
-		return path;
-	};
+  const cleanPath = (path) => {
+    if (path.slice(-3) == ".md") path = path.slice(0, -3);
+    if (path.endsWith("README"))  path = path.slice(0, -6);
+    return path;
+  };
 
-	const loadContent = async () => {
-		try {
-			// Clean URL
-			let path;
-			path = window.location.pathname + window.location.hash;
-			if (!config.browserRouter && path == "/") path = config.sitePath;
-			cwd = path.substr(0, path.lastIndexOf("/")) + "/";
-			if (cwd.startsWith(config.sitePath)) cwd = cwd.slice(config.sitePath.length);
-			if (path.startsWith(config.sitePath)) path = path.slice(config.sitePath.length);
-			path = cleanPath(path);
-			const selector = path.indexOf("#") == -1 ? null : path.substr(path.lastIndexOf("#") + 1);
-			// Load Markdown
-			contentDiv.innerHTML = "";
-			contentDiv.innerHTML = (await renderMD(path)) || "";
+  const loadContent = async () => {
+    try {
+      let path = window.location.pathname + window.location.hash;
+      if (!config.browserRouter && path == "/") path = config.sitePath;
+      cwd = path.substr(0, path.lastIndexOf("/")) + "/";
+      if (cwd.startsWith(config.sitePath)) cwd = cwd.slice(config.sitePath.length);
+      if (path.startsWith(config.sitePath)) path = path.slice(config.sitePath.length);
+      path = cleanPath(path);
+      const selector = path.indexOf("#") == -1 ? null : path.substr(path.lastIndexOf("#") + 1);
+      contentDiv.innerHTML = "";
+      contentDiv.innerHTML = (await renderMD(path)) || "";
 
-			// Reformat document
-			document.title = (document.querySelectorAll("h1")[0]?.innerText || "") + " | " + config.name || "";
-			document.querySelectorAll("#content input[type=checkbox]").forEach((checkbox) => {
-				checkbox.disabled = "";
-				checkbox.parentElement.parentElement.classList.add("checklist");
-			});
-			if (config.browserRouter)
-				document.querySelectorAll("a").forEach((a) => {
-					const href = a.getAttribute("href");
-					if (!/^[a-z]*:\/\/*\b/.test(href))
-						a.onclick = (event) => {
-							event.preventDefault();
-							window.history.pushState({}, window.title, href);
-							loadContent();
-						};
-				});
-			if (selector) document.getElementById(selector)?.scrollIntoView()
+      document.title = (document.querySelectorAll("h1")[0]?.innerText || "") + " | " + config.name || "";
+      document.querySelectorAll("#content input[type=checkbox]").forEach((checkbox) => {
+        checkbox.disabled = "";
+        checkbox.parentElement.parentElement.classList.add("checklist");
+      });
+      if (config.browserRouter)
+        document.querySelectorAll("a").forEach((a) => {
+          const href = a.getAttribute("href");
+          if (!/^[a-z]*:\/\/*\b/.test(href))
+            a.onclick = (event) => {
+              event.preventDefault();
+              window.history.pushState({}, window.title, href);
+              loadContent();
+            };
+        });
+      if (selector) document.getElementById(selector)?.scrollIntoView();
+      document.body.classList.add("loaded");
+      if (!config.browserRouter) window.location.replace(config.sitePath + path);
+    } catch (err) {
+      if ((config.browserRouter && window.location.pathname != config.sitePath) ||
+          (!config.browserRouter && window.location.hash != config.sitePath)) {
+        location.replace(config.sitePath);
+      }
+    }
+  };
 
-			document.body.classList.add("loaded");
-			if (!config.browserRouter) window.location.replace(config.sitePath + path);
-		} catch (err) {
-			if ((config.browserRouter && window.location.pathname != config.sitePath) || (!config.browserRouter && window.location.hash != config.sitePath)) {
-				location.replace(config.sitePath);
-			}
-		}
-	};
+  const loadFooter = async (element) => {
+    const html = await renderMD(element);
+    if (!html) return;
+    let div = document.createElement("div");
+    div.innerHTML = html;
+    div.id = element.replaceAll("/", "-");
+    footersDiv.prepend(div);
+  };
 
-	const loadFooter = async (element) => {
-		const html = await renderMD(element);
-		if (!html) return;
-		let div = document.createElement("div");
-		div.innerHTML = html;
-		div.id = element.replaceAll("/", "-");
-		footersDiv.prepend(div);
-	};
+  window.onload = async () => {
+    await Promise.all((config.components || []).map((c) => loadComponent(c)));
+    await loadContent();
+    await Promise.all((config.footers || []).map((f) => loadFooter(f)));
+    initGraph();  // initialise graph after page load
+  };
+  window.onhashchange = loadContent;
+  if (config.browserRouter) window.onpopstate = loadContent;
+</script>
 
-	window.onload = async () => {
-		await Promise.all((config.components || []).map((component) => loadComponent(component)));
-		await loadContent();
-		await Promise.all((config.footers || []).map((footer) => loadFooter(footer)));
-	};
-	window.onhashchange = loadContent;
-	if (config.browserRouter) window.onpopstate = loadContent;
+<!-- ════════════════════════════════════════════════════════
+     Graph engine (from doc 2)
+═════════════════════════════════════════════════════════ -->
+<script>
+  // ── Panel open/close ──────────────────────────────────
+  const graphPanel   = document.getElementById('graph-panel');
+  const graphToggle  = document.getElementById('graph-toggle');
+  const graphClose   = document.getElementById('graph-close');
+  const tooltip      = document.getElementById('graph-tooltip');
+
+  let cyInstance = null;   // lazily initialised
+  let graphReady = false;
+
+  graphToggle.addEventListener('click', () => {
+    graphPanel.classList.add('open');
+    if (!graphReady) loadGraph();
+    else cyInstance?.resize().fit(undefined, 40);
+  });
+
+  graphClose.addEventListener('click', () => {
+    graphPanel.classList.remove('open');
+    tooltip.style.display = 'none';
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') graphClose.click();
+  });
+
+  // ── Graph init ────────────────────────────────────────
+  function initGraph() {
+    // nothing — lazy-loaded on first open
+  }
+
+  function loadGraph() {
+    const graphPath = new URL('./graph.json', window.location.href).href;
+
+    fetch(graphPath)
+      .then(res => {
+        if (!res.ok) throw new Error(graphPath);
+        return res.json();
+      })
+      .then(data => {
+        graphReady = true;
+
+        // Degree map
+        const degreeMap = {};
+        data.forEach(el => {
+          if (el.data.source && el.data.target) {
+            degreeMap[el.data.source] = (degreeMap[el.data.source] || 0) + 1;
+            degreeMap[el.data.target] = (degreeMap[el.data.target] || 0) + 1;
+          }
+        });
+
+        // Stats
+        const nodeCount = data.filter(e => !e.data.source).length;
+        const edgeCount = data.filter(e =>  e.data.source).length;
+        const hubNode   = Object.entries(degreeMap).sort((a,b) => b[1]-a[1])[0];
+        document.getElementById('stat-nodes').textContent = nodeCount;
+        document.getElementById('stat-edges').textContent = edgeCount;
+        document.getElementById('stat-hub').textContent   = hubNode ? hubNode[0] : '—';
+
+        // Color helpers
+        const nodeColor = id => {
+          const d = degreeMap[id] || 0;
+          return d >= 4 ? '#a855f7' : d >= 2 ? '#f97316' : '#fde047';
+        };
+
+        // Cytoscape
+        cyInstance = cytoscape({
+          container: document.getElementById('foam-graph'),
+          elements: data,
+          style: [
+            {
+              selector: 'node',
+              style: {
+                'label': 'data(label)',
+                'background-color': ele => nodeColor(ele.id()),
+                'color': '#0a0a0f',
+                'text-valign': 'center',
+                'text-halign': 'center',
+                'font-family': 'JetBrains Mono, monospace',
+                'font-size': ele => Math.max(9, 10 + (degreeMap[ele.id()]||0) * 1.2) + 'px',
+                'font-weight': '600',
+                'width':  ele => Math.max(28, 22 + (degreeMap[ele.id()]||0) * 12),
+                'height': ele => Math.max(28, 22 + (degreeMap[ele.id()]||0) * 12),
+                'border-width': 0,
+                'shadow-blur': 20,
+                'shadow-color': ele => nodeColor(ele.id()),
+                'shadow-opacity': 0.6,
+                'shadow-offset-x': 0, 'shadow-offset-y': 0,
+                'transition-property': 'background-color, shadow-blur, shadow-opacity, width, height',
+                'transition-duration': '0.2s'
+              }
+            },
+            {
+              selector: 'node:selected',
+              style: {
+                'background-color': '#38bdf8',
+                'shadow-color': '#38bdf8',
+                'shadow-blur': 30, 'shadow-opacity': 0.8,
+                'color': '#0a0a0f'
+              }
+            },
+            { selector: 'node.hover',       style: { 'shadow-blur': 35, 'shadow-opacity': 0.9 } },
+            {
+              selector: 'edge',
+              style: {
+                'line-color': 'rgba(148,163,184,0.2)',
+                'width': 1.2, 'curve-style': 'bezier', 'opacity': 0.7,
+                'transition-property': 'line-color, opacity',
+                'transition-duration': '0.2s'
+              }
+            },
+            { selector: 'edge.highlighted', style: { 'line-color': 'rgba(249,115,22,0.6)', 'width': 2, 'opacity': 1 } },
+            { selector: '.faded',           style: { 'opacity': 0.15 } }
+          ],
+          layout: {
+            name: 'concentric',
+            minNodeSpacing: 60,
+            levelWidth: () => 2,
+            concentric: node => degreeMap[node.id()] || 0,
+            padding: 60,
+            animate: true,
+            animationDuration: 600,
+            animationEasing: 'ease-out-cubic'
+          },
+          wheelSensitivity: 0.3,
+          minZoom: 0.2, maxZoom: 4
+        });
+
+        const cy = cyInstance;
+
+        // Hover
+        cy.on('mouseover', 'node', evt => {
+          const node = evt.target;
+          const id   = node.id();
+          const deg  = degreeMap[id] || 0;
+          node.addClass('hover');
+          cy.elements().addClass('faded');
+          node.removeClass('faded');
+          node.connectedEdges().removeClass('faded').addClass('highlighted');
+          node.neighborhood('node').removeClass('faded');
+
+          const pos  = evt.renderedPosition;
+          const rect = document.getElementById('foam-graph').getBoundingClientRect();
+          tooltip.style.display = 'block';
+          tooltip.style.left = (rect.left + pos.x + 14) + 'px';
+          tooltip.style.top  = (rect.top  + pos.y - 14) + 'px';
+          document.getElementById('tip-id').textContent   = id;
+          document.getElementById('tip-meta').textContent = `${deg} connection${deg !== 1 ? 's' : ''} · click to open`;
+        });
+
+        cy.on('mouseout', 'node', evt => {
+          evt.target.removeClass('hover');
+          cy.elements().removeClass('faded highlighted');
+          tooltip.style.display = 'none';
+        });
+
+        cy.on('mousemove', 'node', evt => {
+          const pos  = evt.renderedPosition;
+          const rect = document.getElementById('foam-graph').getBoundingClientRect();
+          tooltip.style.left = (rect.left + pos.x + 14) + 'px';
+          tooltip.style.top  = (rect.top  + pos.y - 14) + 'px';
+        });
+
+        // Click → navigate into docs (uses browserRouter-aware path)
+        cy.on('tap', 'node', evt => {
+          const id   = evt.target.id();
+          const path = config.browserRouter ? `/${id}` : `${config.sitePath}#/${id}`;
+          graphPanel.classList.remove('open');
+          window.history.pushState({}, '', path);
+          loadContent();
+        });
+
+        // Controls
+        document.getElementById('btn-fit').addEventListener('click',
+          () => cy.fit(undefined, 40));
+        document.getElementById('btn-zoom-in').addEventListener('click',
+          () => cy.zoom({ level: cy.zoom() * 1.3, renderedPosition: { x: cy.width()/2, y: cy.height()/2 } }));
+        document.getElementById('btn-zoom-out').addEventListener('click',
+          () => cy.zoom({ level: cy.zoom() * 0.75, renderedPosition: { x: cy.width()/2, y: cy.height()/2 } }));
+      })
+      .catch(err => {
+        graphReady = false;
+        document.getElementById('err-path').textContent = 'Could not load: ' + err.message;
+        document.getElementById('graph-error').style.display = 'block';
+      });
+  }
 </script>
 
 </html>
