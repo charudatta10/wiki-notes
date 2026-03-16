@@ -1,0 +1,80 @@
+[
+  {
+    "data": {
+      "id": "about",
+      "label": "about"
+    }
+  },
+  {
+    "data": {
+      "id": "graph_1",
+      "label": "graph_1"
+    }
+  },
+  {
+    "data": {
+      "id": "inbox",
+      "label": "inbox"
+    }
+  },
+  {
+    "data": {
+      "id": "README",
+      "label": "README"
+    }
+  },
+  {
+    "data": {
+      "id": "wikilinks",
+      "label": "wikilinks"
+    }
+  },
+  {
+    "data": {
+      "source": "README",
+      "target": "wikilinks"
+    }
+  },
+  {
+    "data": {
+      "id": "foam-guide",
+      "label": "foam-guide"
+    }
+  },
+  {
+    "data": {
+      "source": "README",
+      "target": "foam-guide"
+    }
+  },
+  {
+    "data": {
+      "source": "README",
+      "target": "about"
+    }
+  },
+  {
+    "data": {
+      "id": "_coverpage",
+      "label": "_coverpage"
+    }
+  },
+  {
+    "data": {
+      "source": "_coverpage",
+      "target": "wikilinks"
+    }
+  },
+  {
+    "data": {
+      "id": "_navbar",
+      "label": "_navbar"
+    }
+  },
+  {
+    "data": {
+      "id": "_sidebar",
+      "label": "_sidebar"
+    }
+  }
+]

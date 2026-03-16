@@ -1,520 +1,463 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foam Wiki</title>
-  <meta name="description" content="Personal knowledge base powered by Foam & Docsify">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
-
-  <!-- Docsify theme: dark -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
-
-  <style>
-    /* ─── Design tokens ─────────────────────────────────────── */
-    :root {
-      --base-font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      --base-font-size: 15px;
-      --base-line-height: 1.75;
-
-      --theme-color: #7ee8a2;          /* mint accent */
-      --sidebar-width: 280px;
-      --sidebar-background: #0d1117;
-      --content-background: #0d1117;
-      --base-background-color: #0d1117;
-      --base-color: #cdd9e5;
-
-      --heading-color: #e6edf3;
-      --link-color: #7ee8a2;
-      --link-color--hover: #a8f5c0;
-      --code-theme-background: #161b22;
-      --code-theme-text: #79c0ff;
-      --blockquote-background: #161b22;
-      --blockquote-color: #8b949e;
-      --blockquote-border-color: #30363d;
-
-      --sidebar-nav-link-color: #8b949e;
-      --sidebar-nav-link-color--active: #7ee8a2;
-      --sidebar-nav-link-background-color--active: #1c2128;
-      --sidebar-nav-link-border-color--active: #7ee8a2;
-      --sidebar-nav-pagelink-color: #e6edf3;
-    }
-
-    /* ─── Google Fonts ──────────────────────────────────────── */
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;1,400&family=Syne:wght@400;600;700;800&display=swap');
-
-    /* ─── Global ────────────────────────────────────────────── */
-    * { box-sizing: border-box; }
-
-    body {
-      font-family: var(--base-font-family);
-      background: var(--base-background-color);
-      color: var(--base-color);
-    }
-
-    /* ─── Sidebar ───────────────────────────────────────────── */
-    .sidebar {
-      background: var(--sidebar-background);
-      border-right: 1px solid #21262d;
-      padding-top: 0;
-    }
-
-    .sidebar-nav {
-      padding: 0 16px 40px;
-    }
-
-    /* Wiki title / brand in sidebar */
-    .app-name-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 24px 20px 20px;
-      font-family: 'Syne', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: #e6edf3 !important;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      border-bottom: 1px solid #21262d;
-      margin-bottom: 16px;
-    }
-
-    .app-name-link::before {
-      content: '🧠';
-      font-size: 1.4rem;
-    }
-
-    /* Search box */
-    .search input {
-      background: #161b22;
-      border: 1px solid #30363d;
-      color: #e6edf3;
-      border-radius: 6px;
-      font-family: var(--base-font-family);
-      font-size: 13px;
-      padding: 8px 12px;
-      width: 100%;
-      transition: border-color .2s;
-    }
-
-    .search input:focus {
-      outline: none;
-      border-color: var(--theme-color);
-      box-shadow: 0 0 0 3px rgba(126,232,162,.15);
-    }
-
-    .search input::placeholder { color: #484f58; }
-
-    /* Nav links */
-    .sidebar-nav ul li a {
-      font-size: 13px;
-      color: var(--sidebar-nav-link-color);
-      padding: 5px 12px;
-      border-radius: 5px;
-      transition: color .15s, background .15s;
-      display: block;
-    }
-
-    .sidebar-nav ul li a:hover {
-      color: #e6edf3;
-      background: #161b22;
-      text-decoration: none;
-    }
-
-    .sidebar-nav ul li.active > a {
-      color: var(--theme-color);
-      background: rgba(126,232,162,.08);
-      font-weight: 600;
-    }
-
-    /* Section headings inside sidebar */
-    .sidebar-nav ul p {
-      font-family: 'Syne', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: #484f58;
-      padding: 14px 12px 4px;
-      margin: 0;
-    }
-
-    /* ─── Main content ──────────────────────────────────────── */
-    .content {
-      max-width: 820px;
-    }
-
-    section.cover,
-    .markdown-section {
-      padding: 40px 48px 60px;
-    }
-
-    /* Headings */
-    .markdown-section h1,
-    .markdown-section h2,
-    .markdown-section h3,
-    .markdown-section h4 {
-      font-family: 'Syne', sans-serif;
-      color: var(--heading-color);
-      letter-spacing: -0.02em;
-    }
-
-    .markdown-section h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      border-bottom: 1px solid #21262d;
-      padding-bottom: 12px;
-    }
-
-    .markdown-section h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      border-bottom: 1px solid #21262d;
-      padding-bottom: 8px;
-      margin-top: 2.2rem;
-    }
-
-    .markdown-section h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #79c0ff;
-      margin-top: 1.8rem;
-    }
-
-    /* Links */
-    .markdown-section a {
-      color: var(--link-color);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(126,232,162,.3);
-      transition: border-color .15s, color .15s;
-    }
-
-    .markdown-section a:hover {
-      color: var(--link-color--hover);
-      border-color: var(--link-color--hover);
-    }
-
-    /* [[wikilink]] styling via docsify-wikilinks plugin */
-    .markdown-section a.wikilink {
-      color: #d2a8ff;
-      border-color: rgba(210,168,255,.3);
-    }
-
-    /* Code */
-    .markdown-section code {
-      background: #161b22;
-      color: #79c0ff;
-      border: 1px solid #30363d;
-      border-radius: 4px;
-      padding: 2px 6px;
-      font-size: .88em;
-    }
-
-    .markdown-section pre {
-      background: #161b22 !important;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      overflow: auto;
-    }
-
-    .markdown-section pre code {
-      background: transparent;
-      border: none;
-      padding: 0;
-      font-size: .85rem;
-      color: #e6edf3;
-    }
-
-    /* Blockquote */
-    .markdown-section blockquote {
-      background: #161b22;
-      border-left: 3px solid var(--theme-color);
-      border-radius: 0 6px 6px 0;
-      color: #8b949e;
-      margin: 1.2rem 0;
-      padding: 12px 20px;
-    }
-
-    .markdown-section blockquote p { margin: 0; }
-
-    /* Tables */
-    .markdown-section table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: .9rem;
-    }
-
-    .markdown-section table th {
-      background: #161b22;
-      color: #e6edf3;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: .8rem;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      padding: 10px 14px;
-      border: 1px solid #30363d;
-    }
-
-    .markdown-section table td {
-      padding: 8px 14px;
-      border: 1px solid #21262d;
-      color: #8b949e;
-    }
-
-    .markdown-section table tr:hover td {
-      background: #161b22;
-      color: #cdd9e5;
-    }
-
-    /* Tags (foam-style) */
-    .markdown-section .tag,
-    .markdown-section span[data-tag] {
-      display: inline-block;
-      background: rgba(126,232,162,.1);
-      color: var(--theme-color);
-      border: 1px solid rgba(126,232,162,.3);
-      border-radius: 20px;
-      font-size: .75rem;
-      padding: 2px 10px;
-      margin: 2px;
-      font-weight: 600;
-    }
-
-    /* Callout boxes */
-    .markdown-section .tip,
-    .markdown-section .warning,
-    .markdown-section .danger,
-    .markdown-section .note {
-      border-radius: 8px;
-      padding: 14px 20px;
-      margin: 1.2rem 0;
-      font-size: .9rem;
-    }
-
-    /* ─── Cover page ────────────────────────────────────────── */
-    section.cover {
-      background: linear-gradient(135deg, #0d1117 0%, #0d1117 60%, #0f1922 100%);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .cover-main {
-      text-align: left;
-      max-width: 640px;
-    }
-
-    section.cover h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 800;
-      color: #e6edf3;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-    }
-
-    section.cover h1 span {
-      color: var(--theme-color);
-    }
-
-    section.cover p {
-      font-size: 1rem;
-      color: #8b949e;
-      max-width: 480px;
-      line-height: 1.7;
-    }
-
-    section.cover .cover-main > p:last-child a {
-      display: inline-block;
-      background: var(--theme-color);
-      color: #0d1117;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 24px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: .9rem;
-      letter-spacing: .02em;
-      transition: opacity .2s;
-      text-decoration: none;
-    }
-
-    section.cover .cover-main > p:last-child a:hover { opacity: .85; }
-
-    /* ─── Navbar ────────────────────────────────────────────── */
-    .app-nav {
-      background: rgba(13,17,23,.9);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #21262d;
-    }
-
-    .app-nav a {
-      color: #8b949e;
-      font-size: 13px;
-      font-family: var(--base-font-family);
-      transition: color .15s;
-    }
-
-    .app-nav a:hover { color: #e6edf3; }
-
-    /* ─── Backlinks section (custom) ────────────────────────── */
-    .backlinks-section {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #21262d;
-    }
-
-    .backlinks-section h4 {
-      font-family: 'Syne', sans-serif;
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: #484f58;
-      margin: 0 0 12px;
-    }
-
-    .backlinks-section a {
-      display: inline-block;
-      background: #161b22;
-      border: 1px solid #30363d;
-      color: #79c0ff !important;
-      border-radius: 5px;
-      padding: 4px 12px;
-      font-size: .82rem;
-      margin: 3px;
-      transition: border-color .15s;
-    }
-
-    .backlinks-section a:hover {
-      border-color: #79c0ff;
-    }
-
-    /* ─── Scrollbar ─────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #484f58; }
-
-    /* ─── Progress bar ──────────────────────────────────────── */
-    #nprogress .bar { background: var(--theme-color) !important; height: 2px; }
-    #nprogress .peg  { box-shadow: 0 0 10px var(--theme-color), 0 0 5px var(--theme-color); }
-
-    /* ─── Responsive ────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .markdown-section { padding: 24px 20px 40px; }
-    }
-  </style>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" href="docs/logo.svg">
 </head>
+
+<!-- USER CONFIG -->
+<script>
+	const config = {
+		sitePath: "/",
+		browserRouter: false,
+		name: "Raito",
+		components: [],
+		footers: [],
+	};
+</script>
+
+<style>
+	* {
+		scroll-margin-top: 5rem;
+	}
+
+	#docs-github p {
+		margin: 0;
+	}
+
+	#docs-navbar {
+		width: 100%;
+		background-color: var(--color-1);
+		color: white;
+		margin: 0;
+		position: fixed;
+		box-shadow: 0px 0px 16px #00000047;
+		padding-left: 2rem;
+		z-index: 5;
+	}
+
+	#docs-navbar>ul>li>a>img {
+		border-radius: var(--border-radius);
+		margin: -1em 0;
+		vertical-align: super;
+		margin-right: 0.5em;
+		max-height: 2em;
+		width: 2rem;
+	}
+
+	#docs-navbar ul {
+		display: flex;
+		gap: 1rem;
+		list-style: none;
+		margin: 0;
+		border-radius: inherit;
+		background: inherit;
+		border: none;
+	}
+
+	#docs-navbar li {
+		margin: 1.4rem 0rem;
+		padding: inherit;
+		border: none;
+	}
+
+	#docs-navbar li::before {
+		content: none;
+	}
+
+	#docs-navbar a {
+		text-decoration: none;
+		padding: 0.9em 1.1em;
+		color: white;
+		font-weight: bold;
+	}
+
+	#docs-navbar a:hover {
+		background-color: #ffffff14;
+		border-radius: var(--border-radius);
+	}
+
+	#docs-footer {
+		text-align: center;
+		background-color: var(--color-1);
+		color: white;
+		padding: 1rem;
+	}
+
+	#docs-footer a {
+		color: white;
+		text-decoration: underline;
+	}
+</style>
+
+<!-- Marked.js - Markdown renderer -->
+<script src="https://cdn.jsdelivr.net/npm/marked@5.1.1/marked.min.js"></script>
+
+<!-- OPTIONAL : Highlight.js - Syntax Highlighting -->
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-dark.min.css">
+-->
+
+<style>
+	:root {
+		--text-color: #313f47;
+		--border-color: #dddddd;
+		--background-color: white;
+		--darker-background-color: #0000000a;
+		--lighter-background-color: #fcfcfc;
+		--color-1: #4285f4;
+		--color-2: #db4437;
+		--color-3: #f4b400;
+		--color-4: #0f9d58;
+		--border-radius: 7px;
+	}
+
+	[data-theme="dark"] {
+		--text-color: #adbac7;
+		--border-color: #373e47;
+		--background-color: #22272e;
+		--darker-background-color: rgba(99, 110, 123, 0.4);
+		--lighter-background-color: rgba(99, 110, 123, 0.1);
+	}
+
+	body {
+		color: var(--text-color);
+		font-family: "Open Sans", Helvetica, sans-serif;
+		margin: 0;
+		padding: 0;
+		background-color: var(--background-color);
+		opacity: 0;
+		transition: opacity 0.3s;
+	}
+
+	body.loaded {
+		opacity: 1;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		padding-bottom: 0.3em;
+	}
+
+	h1,
+	h2 {
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--color-1);
+	}
+
+	blockquote a {
+		color: #92d3ff;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	hr {
+		border: none;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	img {
+		max-height: 20em;
+		border-radius: var(--border-radius);
+	}
+
+	#content {
+		max-width: 50rem;
+		padding: 5rem 1rem;
+		margin: auto;
+		padding-top: 5em;
+	}
+
+	:not(pre)>code {
+		background: var(--darker-background-color);
+		border-radius: var(--border-radius);
+		padding: 0.2em 0.4em;
+	}
+
+	pre {
+		background: var(--darker-background-color);
+		padding: 1.6em !important;
+		overflow: auto;
+		padding: calc(0.75em);
+		margin-bottom: 1em;
+		border-radius: var(--border-radius);
+	}
+
+	blockquote {
+		margin: 0;
+		padding: 1em 2em !important;
+		background: #4285f4;
+		color: white;
+		overflow: auto;
+		border-radius: var(--border-radius);
+	}
+
+	table {
+		border-collapse: collapse;
+		margin: 2em 0;
+		font-size: 0.9em;
+		font-family: sans-serif;
+		min-width: 20em;
+		border-radius: var(--border-radius);
+		overflow: auto;
+		display: block;
+	}
+
+	table thead tr {
+		background-color: var(--color-1);
+		color: #ffffff;
+		text-align: left;
+	}
+
+	table th,
+	table td {
+		padding: 0.8em 1.2em;
+	}
+
+	table tbody tr:nth-of-type(odd) {
+		background-color: var(--darker-background-color);
+	}
+
+	table tbody tr:nth-of-type(even) {
+		background-color: var(--lighter-background-color);
+	}
+
+	table tbody tr.active-row {
+		font-weight: bold;
+		color: var(--color-1);
+	}
+
+	ul {
+		padding-inline-start: 0;
+		list-style: none;
+		background-color: var(--lighter-background-color);
+		border-radius: var(--border-radius);
+		border: 1px solid var(--darker-background-color);
+		padding: 0;
+	}
+
+	li {
+		padding: 0.9em;
+		border-bottom: 1px solid var(--darker-background-color);
+	}
+
+	li:last-of-type {
+		border: none;
+	}
+
+	ul ul {
+		border: none;
+		margin: 1em -0.9em -0.9em -0.9em;
+		border-top: 1px solid var(--darker-background-color);
+		border-radius: 0;
+	}
+
+	ul ul li {
+		padding-left: 4em;
+	}
+
+	ul:not(.checklist) li::before {
+		content: "-";
+		margin-right: 0.7em;
+		color: var(--border-color);
+	}
+
+	.checklist input[type="checkbox"] {
+		pointer-events: none;
+		margin-right: 1em;
+		height: 1.2em;
+		width: 1.2em;
+		vertical-align: top;
+
+		appearance: none;
+		background: var(--darker-background-color);
+		border-radius: 2px;
+	}
+
+	.checklist input[type="checkbox"]:checked {
+		appearance: auto;
+		background: inherit;
+	}
+
+	button,
+	.button {
+		padding: 1rem 2em;
+		background: #4285f4;
+		color: white;
+		overflow: auto;
+		border-radius: var(--border-radius);
+		border: none;
+		transition: opacity 0.3s;
+		cursor: pointer;
+	}
+
+	button:hover,
+	.button:hover {
+		text-decoration: none;
+		opacity: 0.9;
+	}
+</style>
+
 <body>
-
-  <!-- ── Docsify config ──────────────────────────────────────── -->
-  <script>
-    window.$docsify = {
-      name: 'Foam Wiki',
-      nameLink: '/',
-
-      repo: '',               // optional: 'https://github.com/you/your-foam-repo'
-
-      loadSidebar: '_sidebar.md',
-      loadNavbar: '_navbar.md',
-      coverpage: '_coverpage.md',
-      onlyCover: false,
-
-      auto2top: true,
-      autoHeader: false,
-
-      maxLevel: 4,
-      subMaxLevel: 3,
-
-      homepage: 'README.md',
-
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Search notes…',
-        noData: 'No results.',
-        depth: 6,
-        hideOtherSidebarContent: false,
-      },
-
-      pagination: {
-        previousText: '← Previous',
-        nextText: 'Next →',
-        crossChapter: true,
-      },
-
-      /* Foam wikilinks: [[Note Title]] → /note-title */
-      wikilinks: {
-        pattern: /\[\[(.+?)\]\]/g,
-        transform: (slug) =>
-          '#/' + slug.toLowerCase().replace(/\s+/g, '-'),
-      },
-
-      plugins: [
-        /* Inject backlinks placeholder after each page renders */
-        function(hook) {
-          hook.afterEach(function(html) {
-            return html + `
-              <div class="backlinks-section" id="backlinks">
-                <h4>🔗 Backlinks</h4>
-                <span style="color:#484f58;font-size:.82rem;">
-                  (Populate via Foam VS Code extension or a build step)
-                </span>
-              </div>`;
-          });
-        }
-      ],
-
-      /* Mermaid diagrams */
-      markdown: {
-        renderer: {
-          code(code, lang) {
-            if (lang === 'mermaid') {
-              return `<div class="mermaid">${code}</div>`;
-            }
-            return this.origin.code.apply(this, arguments);
-          }
-        }
-      }
-    };
-  </script>
-
-  <!-- ── Docsify core ────────────────────────────────────────── -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-
-  <!-- ── Plugins ────────────────────────────────────────────── -->
-  <!-- Full-text search -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-
-  <!-- Pagination (prev / next) -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-
-  <!-- Copy-to-clipboard on code blocks -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
-
-  <!-- Emoji shortcodes :tada: -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
-
-  <!-- Mermaid diagrams -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-  <script>mermaid.initialize({ startOnLoad: false, theme: 'dark' });</script>
-  <script>
-    window.$docsify.plugins = (window.$docsify.plugins || []).concat(function(hook) {
-      hook.doneEach(function() {
-        mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-      });
-    });
-  </script>
-
-  <!-- External link target _blank -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify-external-link@1/dist/docsify-external-link.min.js"></script>
-
-  <!-- NProgress bar -->
-  <script src="https://cdn.jsdelivr.net/npm/nprogress/nprogress.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress/nprogress.css">
-
+	<div id="components"></div>
+	<div id="content"></div>
+	<div id="footer"></div>
 </body>
+<script>
+	const markedProps = {};
+	if (typeof hljs !== "undefined")
+		markedProps.highlight = (code) => hljs.highlightAuto(code).value;
+
+	let cwd = "";
+	config.contentPath = config.sitePath;
+	const contentDiv = document.getElementById("content");
+	const footersDiv = document.getElementById("footer");
+	const componentsDiv = document.getElementById("components");
+	if (!config.browserRouter) config.sitePath = config.sitePath + "#/";
+
+	// Rewrite relative URLs
+	marked.use({
+		walkTokens: (token) => {
+			if ("link" == token.type && !/^[a-z]*:\/\/*\b/.test(token.href)) {
+				token.href = cleanPath(config.sitePath + cwd + token.href);
+
+				// Resolve paths
+				token.href = token.href
+					.split("/")
+					.reduce((a, v) => {
+						if (v === ".");
+						else if (v === "..") a.pop();
+						else a.push(v);
+						return a;
+					}, [])
+					.join("/");
+				if (token.href == "") token.href = "/";
+			}
+		},
+	});
+	marked.use({
+		extensions: [{
+			name: 'include',
+			level: 'inline',
+			start: (src) => src.indexOf("include("),
+			tokenizer(src) {
+				const match = /^include\((.*?)\)/.exec(src);
+				if (match) {
+					return {
+						type: 'include',
+						raw: match[0],
+						url: match[1],
+						html: '',
+					};
+				}
+			},
+			renderer: (token) => token.html,
+		}],
+		async: true,
+		async walkTokens(token) {
+			if (token.type === 'include') {
+				token.url = cwd + cleanPath(token.url)
+				token.html = await renderMD(token.url)
+			}
+		}
+	});
+
+	const renderMD = async (path) => {
+		if (path.indexOf("#") != -1) path = path.substr(0, path.lastIndexOf("#"));
+		if (path.slice(-1) == "/" || path == "") path += "README";
+		const res = await fetch(`${config.contentPath}${path}.md`);
+		if (res.status != 200) throw Error();
+		const markdown = await res.text();
+		if (markdown.startsWith("<!doctype html>")) throw Error();
+		return marked.parse(markdown, markedProps);
+	};
+
+	const loadComponent = async (element) => {
+		const html = await renderMD(element);
+		if (!html) return;
+		let div = document.createElement("div");
+		div.innerHTML = html;
+		div.id = element.replaceAll("/", "-");
+		componentsDiv.prepend(div);
+	};
+
+	const cleanPath = (path) => {
+		if (path.slice(-3) == ".md") path = path.slice(0, -3);
+		if (path.endsWith("README")) path = path.slice(0, -6);
+		return path;
+	};
+
+	const loadContent = async () => {
+		try {
+			// Clean URL
+			let path;
+			path = window.location.pathname + window.location.hash;
+			if (!config.browserRouter && path == "/") path = config.sitePath;
+			cwd = path.substr(0, path.lastIndexOf("/")) + "/";
+			if (cwd.startsWith(config.sitePath)) cwd = cwd.slice(config.sitePath.length);
+			if (path.startsWith(config.sitePath)) path = path.slice(config.sitePath.length);
+			path = cleanPath(path);
+			const selector = path.indexOf("#") == -1 ? null : path.substr(path.lastIndexOf("#") + 1);
+			// Load Markdown
+			contentDiv.innerHTML = "";
+			contentDiv.innerHTML = (await renderMD(path)) || "";
+
+			// Reformat document
+			document.title = (document.querySelectorAll("h1")[0]?.innerText || "") + " | " + config.name || "";
+			document.querySelectorAll("#content input[type=checkbox]").forEach((checkbox) => {
+				checkbox.disabled = "";
+				checkbox.parentElement.parentElement.classList.add("checklist");
+			});
+			if (config.browserRouter)
+				document.querySelectorAll("a").forEach((a) => {
+					const href = a.getAttribute("href");
+					if (!/^[a-z]*:\/\/*\b/.test(href))
+						a.onclick = (event) => {
+							event.preventDefault();
+							window.history.pushState({}, window.title, href);
+							loadContent();
+						};
+				});
+			if (selector) document.getElementById(selector)?.scrollIntoView()
+
+			document.body.classList.add("loaded");
+			if (!config.browserRouter) window.location.replace(config.sitePath + path);
+		} catch (err) {
+			if ((config.browserRouter && window.location.pathname != config.sitePath) || (!config.browserRouter && window.location.hash != config.sitePath)) {
+				location.replace(config.sitePath);
+			}
+		}
+	};
+
+	const loadFooter = async (element) => {
+		const html = await renderMD(element);
+		if (!html) return;
+		let div = document.createElement("div");
+		div.innerHTML = html;
+		div.id = element.replaceAll("/", "-");
+		footersDiv.prepend(div);
+	};
+
+	window.onload = async () => {
+		await Promise.all((config.components || []).map((component) => loadComponent(component)));
+		await loadContent();
+		await Promise.all((config.footers || []).map((footer) => loadFooter(footer)));
+	};
+	window.onhashchange = loadContent;
+	if (config.browserRouter) window.onpopstate = loadContent;
+</script>
+
 </html>
