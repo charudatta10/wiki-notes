@@ -1,30 +1,55 @@
-# Welcome to Foam Wiki
+# Foam + Raito Wiki
 
-> Your personal knowledge graph — built with [Foam](https://foambubble.github.io/foam/) and [Docsify](https://docsify.js.org).
+> Your personal knowledge graph — powered by [Foam](https://foambubble.github.io/foam/), [Raito](https://raito.io/).
 
 ## Quick Start
 
 1. Clone or open this folder in **VS Code** with the Foam extension installed.
-2. Run `npx serve .` (or any static server) to preview locally.
-3. Start writing `.md` notes and linking them with `[[wikilinks]]`.
+2. Install dependencies:  
+
+    ```sh
+
+    just setup
+
+    ```
+
+3. Preview locally:  
+
+    ```sh
+    just serve
+    ```
+
+4. Start writing `.md` notes and linking them with `[[wikilinks]]`.
 
 ## What is Foam?
 
 Foam is a personal knowledge management system inspired by Roam Research, built on VS Code and GitHub. Notes live as plain Markdown files you own forever.
 
+## What is Raito?
+
+Raito is a data access management platform that helps you manage and govern access to your data resources efficiently.
+
 ## Structure
 
-| Folder | Purpose |
-|--------|---------|
-| `daily/` | Daily notes & journals |
-| `projects/` | Project-specific notes |
-| `topics/` | Evergreen concept notes |
-| `inbox.md` | Unsorted capture zone |
+| Folder      | Purpose                 |
+| ----------- | ----------------------- |
+| `daily/`    | Daily notes & journals  |
+| `projects/` | Project-specific notes  |
+| `topics/`   | Evergreen concept notes |
+| `inbox.md`  | Unsorted capture zone   |
 
 ## Example Wikilink
 
 This note links to [[foam-guide]] and [[about]].
 
+## justfile Commands
+
+| Command      | Description                       |
+| ------------ | --------------------------------- |
+| `just setup` | Install dependencies              |
+| `just serve` | Serve the site locally            |
+| `just build` | Build static site (if applicable) |
+
 ---
 
-*Last updated: {{date}}*
+Last updated: {{date}}
