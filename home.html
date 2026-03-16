@@ -420,7 +420,7 @@
       // --- Click to navigate ---
       cy.on('tap', 'node', evt => {
         const id = evt.target.id();
-        window.open(`/#/${id}.md`, '_blank');
+        window.open(`/${id}.md`, '_blank');
       });
 
       // --- Control buttons ---
