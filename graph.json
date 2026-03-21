@@ -46,29 +46,5 @@
       "source": "README",
       "target": "about"
     }
-  },
-  {
-    "data": {
-      "id": "_coverpage",
-      "label": "_coverpage"
-    }
-  },
-  {
-    "data": {
-      "source": "_coverpage",
-      "target": "wikilinks"
-    }
-  },
-  {
-    "data": {
-      "id": "_navbar",
-      "label": "_navbar"
-    }
-  },
-  {
-    "data": {
-      "id": "_sidebar",
-      "label": "_sidebar"
-    }
   }
 ]

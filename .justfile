@@ -37,3 +37,4 @@ push:
 deploy:
     just build
     just push
+    
