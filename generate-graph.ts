@@ -1,47 +1,61 @@
-import { readdirSync, readFileSync, writeFileSync } from "fs";
+import { readdirSync, readFileSync, writeFileSync, statSync } from "fs";
 import { join } from "path";
 
-const notesDir = "."; // adjust to your notes folder
+const notesDir = ".";
 
-// Collect all markdown files
-const files = readdirSync(notesDir).filter(f => f.endsWith(".md"));
+// Recursively collect all .md files
+function getMarkdownFiles(dir: string): string[] {
+  const entries = readdirSync(dir);
+  let results: string[] = [];
+
+  for (const entry of entries) {
+    const fullPath = join(dir, entry);
+    const stat = statSync(fullPath);
+
+    if (stat.isDirectory()) {
+      results = results.concat(getMarkdownFiles(fullPath));
+    } else if (entry.endsWith(".md")) {
+      results.push(fullPath);
+    }
+  }
+
+  return results;
+}
+
+const files = getMarkdownFiles(notesDir);
 
 type Node = { data: { id: string; label: string } };
 type Edge = { data: { source: string; target: string } };
 
 const elements: (Node | Edge)[] = [];
-
-// Track nodes to avoid duplicates
 const nodeSet = new Set<string>();
 
-for (const file of files) {
-  const filePath = join(notesDir, file);
+for (const filePath of files) {
   const content = readFileSync(filePath, "utf-8");
-  const noteId = file.replace(".md", "");
 
-  // Add node if not already present
+  // Use relative path as ID (better for subfolders)
+  const noteId = filePath
+    .replace(notesDir + "/", "")
+    .replace(/\.md$/, "");
+
   if (!nodeSet.has(noteId)) {
     elements.push({ data: { id: noteId, label: noteId } });
     nodeSet.add(noteId);
   }
 
-  // Find wikilinks [[...]]
   const regex = /\[\[([^\]]+)\]\]/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
     const target = match[1];
 
-    // Add placeholder node if missing
     if (!nodeSet.has(target)) {
       elements.push({ data: { id: target, label: target } });
       nodeSet.add(target);
     }
 
-    // Add edge
     elements.push({ data: { source: noteId, target } });
   }
 }
 
-// Write graph.json
 writeFileSync("graph.json", JSON.stringify(elements, null, 2));
-console.log("✅ graph.json generated with placeholder nodes");
+console.log("✅ graph.json generated (recursive)");

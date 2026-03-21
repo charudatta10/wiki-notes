@@ -13,6 +13,1554 @@
   },
   {
     "data": {
+      "id": "notes\\decentralized-university\\decentralized-identity",
+      "label": "notes\\decentralized-university\\decentralized-identity"
+    }
+  },
+  {
+    "data": {
+      "id": "Decentralized Identity",
+      "label": "Decentralized Identity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\decentralized-university\\decentralized-identity",
+      "target": "Decentralized Identity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\decentralized-university\\decentralized-identity",
+      "target": "Decentralized Identity"
+    }
+  },
+  {
+    "data": {
+      "id": "decentralized university",
+      "label": "decentralized university"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\decentralized-university\\decentralized-identity",
+      "target": "decentralized university"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\decentralized-university\\p2p-journal",
+      "label": "notes\\decentralized-university\\p2p-journal"
+    }
+  },
+  {
+    "data": {
+      "id": "P2P Journal Idea",
+      "label": "P2P Journal Idea"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\decentralized-university\\p2p-journal",
+      "target": "P2P Journal Idea"
+    }
+  },
+  {
+    "data": {
+      "id": "p2p-journal",
+      "label": "p2p-journal"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\decentralized-university\\p2p-journal",
+      "target": "p2p-journal"
+    }
+  },
+  {
+    "data": {
+      "id": "decentralized-identity",
+      "label": "decentralized-identity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\decentralized-university\\p2p-journal",
+      "target": "decentralized-identity"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\philosophy\\epistemology",
+      "label": "notes\\philosophy\\epistemology"
+    }
+  },
+  {
+    "data": {
+      "id": "Epistemology",
+      "label": "Epistemology"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\philosophy\\epistemology",
+      "target": "Epistemology"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\philosophy\\epistemology",
+      "target": "Epistemology"
+    }
+  },
+  {
+    "data": {
+      "id": "epistemology",
+      "label": "epistemology"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\philosophy\\epistemology",
+      "target": "epistemology"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\philosophy\\programming",
+      "label": "notes\\philosophy\\programming"
+    }
+  },
+  {
+    "data": {
+      "id": "My Programming Philosophy",
+      "label": "My Programming Philosophy"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\philosophy\\programming",
+      "target": "My Programming Philosophy"
+    }
+  },
+  {
+    "data": {
+      "id": "programming philosophy",
+      "label": "programming philosophy"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\philosophy\\programming",
+      "target": "programming philosophy"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\philosophy\\programming",
+      "target": "epistemology"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\code",
+      "label": "notes\\productivity\\code"
+    }
+  },
+  {
+    "data": {
+      "id": "CODE Method",
+      "label": "CODE Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\code",
+      "target": "CODE Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\code",
+      "target": "CODE Method"
+    }
+  },
+  {
+    "data": {
+      "id": "note-taking",
+      "label": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\code",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\note-taking-methods\\bullet-journaling",
+      "label": "notes\\productivity\\note-taking-methods\\bullet-journaling"
+    }
+  },
+  {
+    "data": {
+      "id": "Bullet Journaling",
+      "label": "Bullet Journaling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\bullet-journaling",
+      "target": "Bullet Journaling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\bullet-journaling",
+      "target": "Bullet Journaling"
+    }
+  },
+  {
+    "data": {
+      "id": "task-management",
+      "label": "task-management"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\bullet-journaling",
+      "target": "task-management"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\bullet-journaling",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\note-taking-methods\\cornell-method",
+      "label": "notes\\productivity\\note-taking-methods\\cornell-method"
+    }
+  },
+  {
+    "data": {
+      "id": "Cornell Method",
+      "label": "Cornell Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\cornell-method",
+      "target": "Cornell Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\cornell-method",
+      "target": "Cornell Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\cornell-method",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\cornell-method",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\cornell-method",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\note-taking-methods\\sketchnoting",
+      "label": "notes\\productivity\\note-taking-methods\\sketchnoting"
+    }
+  },
+  {
+    "data": {
+      "id": "Sketchnoting",
+      "label": "Sketchnoting"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\sketchnoting",
+      "target": "Sketchnoting"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\sketchnoting",
+      "target": "Sketchnoting"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\note-taking-methods\\zettelkasten",
+      "label": "notes\\productivity\\note-taking-methods\\zettelkasten"
+    }
+  },
+  {
+    "data": {
+      "id": "Zettelkasten",
+      "label": "Zettelkasten"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\zettelkasten",
+      "target": "Zettelkasten"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\zettelkasten",
+      "target": "Zettelkasten"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\zettelkasten",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\zettelkasten",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking-methods\\zettelkasten",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\note-taking",
+      "label": "notes\\productivity\\note-taking"
+    }
+  },
+  {
+    "data": {
+      "id": "Note Taking",
+      "label": "Note Taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking",
+      "target": "Note Taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking",
+      "target": "Cornell Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking",
+      "target": "Zettelkasten"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking",
+      "target": "task-management"
+    }
+  },
+  {
+    "data": {
+      "id": "productivity",
+      "label": "productivity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\note-taking",
+      "target": "productivity"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\para",
+      "label": "notes\\productivity\\para"
+    }
+  },
+  {
+    "data": {
+      "id": "PARA Method",
+      "label": "PARA Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\para",
+      "target": "PARA Method"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\para",
+      "target": "PARA Method"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\productivity",
+      "label": "notes\\productivity\\productivity"
+    }
+  },
+  {
+    "data": {
+      "id": "Productivity",
+      "label": "Productivity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\productivity",
+      "target": "Productivity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\productivity",
+      "target": "Productivity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\productivity",
+      "target": "productivity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\productivity",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\productivity",
+      "target": "task-management"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\productivity\\task-management",
+      "label": "notes\\productivity\\task-management"
+    }
+  },
+  {
+    "data": {
+      "id": "Task Management",
+      "label": "Task Management"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\task-management",
+      "target": "Task Management"
+    }
+  },
+  {
+    "data": {
+      "id": "Task management",
+      "label": "Task management"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\task-management",
+      "target": "Task management"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\task-management",
+      "target": "task-management"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\task-management",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\productivity\\task-management",
+      "target": "productivity"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\ai-in-note-taking",
+      "label": "notes\\technology\\ai-in-note-taking"
+    }
+  },
+  {
+    "data": {
+      "id": "AI in Note Taking",
+      "label": "AI in Note Taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\ai-in-note-taking",
+      "target": "AI in Note Taking"
+    }
+  },
+  {
+    "data": {
+      "id": "Artificial Intelligence",
+      "label": "Artificial Intelligence"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\ai-in-note-taking",
+      "target": "Artificial Intelligence"
+    }
+  },
+  {
+    "data": {
+      "id": "AI",
+      "label": "AI"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\ai-in-note-taking",
+      "target": "AI"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\ai-in-note-taking",
+      "target": "note-taking"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\ai-in-note-taking",
+      "target": "productivity"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\ai-in-note-taking",
+      "target": "AI"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\fpga",
+      "label": "notes\\technology\\fpga"
+    }
+  },
+  {
+    "data": {
+      "id": "FPGA",
+      "label": "FPGA"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\fpga",
+      "target": "FPGA"
+    }
+  },
+  {
+    "data": {
+      "id": "Field-Programmable Gate Array",
+      "label": "Field-Programmable Gate Array"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\fpga",
+      "target": "Field-Programmable Gate Array"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\fpga",
+      "target": "FPGA"
+    }
+  },
+  {
+    "data": {
+      "id": "FPGAs",
+      "label": "FPGAs"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\fpga",
+      "target": "FPGAs"
+    }
+  },
+  {
+    "data": {
+      "id": "signal-processing",
+      "label": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\fpga",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\gans",
+      "label": "notes\\technology\\gans"
+    }
+  },
+  {
+    "data": {
+      "id": "GANs",
+      "label": "GANs"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\gans",
+      "target": "GANs"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\gans",
+      "target": "GANs"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\gans",
+      "target": "GANs"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\mfdfa",
+      "label": "notes\\technology\\mfdfa"
+    }
+  },
+  {
+    "data": {
+      "id": "MFDFA",
+      "label": "MFDFA"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\mfdfa",
+      "target": "MFDFA"
+    }
+  },
+  {
+    "data": {
+      "id": "Multi-Fractal Detrended Fluctuation Analysis",
+      "label": "Multi-Fractal Detrended Fluctuation Analysis"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\mfdfa",
+      "target": "Multi-Fractal Detrended Fluctuation Analysis"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\mfdfa",
+      "target": "MFDFA"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\modulation",
+      "label": "notes\\technology\\modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "Modulation",
+      "label": "Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\modulation",
+      "target": "Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\modulation",
+      "target": "Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\modulation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\modulation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "modulation",
+      "label": "modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\modulation",
+      "target": "modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\modulation",
+      "target": "modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\rf-and-modulation\\amplitude-modulation",
+      "label": "notes\\technology\\rf-and-modulation\\amplitude-modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\rf-and-modulation\\demodulation",
+      "label": "notes\\technology\\rf-and-modulation\\demodulation"
+    }
+  },
+  {
+    "data": {
+      "id": "Demodulation",
+      "label": "Demodulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\demodulation",
+      "target": "Demodulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\demodulation",
+      "target": "Demodulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\demodulation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\demodulation",
+      "target": "modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\demodulation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\demodulation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\rf-and-modulation\\frequency-modulation",
+      "label": "notes\\technology\\rf-and-modulation\\frequency-modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\rf-and-modulation\\phase-modulation",
+      "label": "notes\\technology\\rf-and-modulation\\phase-modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "Phase Modulation",
+      "label": "Phase Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\phase-modulation",
+      "target": "Phase Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\phase-modulation",
+      "target": "Phase Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\phase-modulation",
+      "target": "modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "Frequency Modulation",
+      "label": "Frequency Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\phase-modulation",
+      "target": "Frequency Modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\rf-and-modulation\\qam",
+      "label": "notes\\technology\\rf-and-modulation\\qam"
+    }
+  },
+  {
+    "data": {
+      "id": "Quadrature Amplitude Modulation",
+      "label": "Quadrature Amplitude Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\qam",
+      "target": "Quadrature Amplitude Modulation"
+    }
+  },
+  {
+    "data": {
+      "id": "QAM",
+      "label": "QAM"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\qam",
+      "target": "QAM"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\qam",
+      "target": "Quadrature Amplitude Modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\qam",
+      "target": "QAM"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\qam",
+      "target": "modulation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\qam",
+      "target": "QAM"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "label": "notes\\technology\\rf-and-modulation\\rf-parameters"
+    }
+  },
+  {
+    "data": {
+      "id": "RF Parameters",
+      "label": "RF Parameters"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "RF Parameters"
+    }
+  },
+  {
+    "data": {
+      "id": "Radio Frequency",
+      "label": "Radio Frequency"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "Radio Frequency"
+    }
+  },
+  {
+    "data": {
+      "id": "RF",
+      "label": "RF"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "RF"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "RF Parameters"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "RF"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf-and-modulation\\rf-parameters",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\rf",
+      "label": "notes\\technology\\rf"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf",
+      "target": "RF"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf",
+      "target": "Radio Frequency"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf",
+      "target": "RF"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\rf",
+      "target": "RF"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\signal-processing-concepts\\convolution",
+      "label": "notes\\technology\\signal-processing-concepts\\convolution"
+    }
+  },
+  {
+    "data": {
+      "id": "Convolution",
+      "label": "Convolution"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\convolution",
+      "target": "Convolution"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\convolution",
+      "target": "Convolution"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\convolution",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "convolution",
+      "label": "convolution"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\convolution",
+      "target": "convolution"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\convolution",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\convolution",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\signal-processing-concepts\\correlation",
+      "label": "notes\\technology\\signal-processing-concepts\\correlation"
+    }
+  },
+  {
+    "data": {
+      "id": "Correlation",
+      "label": "Correlation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "Correlation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "Correlation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "correlation",
+      "label": "correlation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "correlation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "correlation"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\correlation",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\signal-processing-concepts\\filtering",
+      "label": "notes\\technology\\signal-processing-concepts\\filtering"
+    }
+  },
+  {
+    "data": {
+      "id": "Filtering",
+      "label": "Filtering"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\filtering",
+      "target": "Filtering"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\filtering",
+      "target": "Filtering"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\filtering",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\filtering",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\filtering",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\signal-processing-concepts\\quantization",
+      "label": "notes\\technology\\signal-processing-concepts\\quantization"
+    }
+  },
+  {
+    "data": {
+      "id": "Quantization",
+      "label": "Quantization"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\quantization",
+      "target": "Quantization"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\quantization",
+      "target": "Quantization"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\quantization",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\quantization",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "sampling",
+      "label": "sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\quantization",
+      "target": "sampling"
+    }
+  },
+  {
+    "data": {
+      "id": "quantization",
+      "label": "quantization"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\quantization",
+      "target": "quantization"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\quantization",
+      "target": "quantization"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\signal-processing-concepts\\sampling",
+      "label": "notes\\technology\\signal-processing-concepts\\sampling"
+    }
+  },
+  {
+    "data": {
+      "id": "Sampling",
+      "label": "Sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "Sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "Sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing-concepts\\sampling",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\signal-processing",
+      "label": "notes\\technology\\signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "Signal Processing",
+      "label": "Signal Processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "Signal Processing"
+    }
+  },
+  {
+    "data": {
+      "id": "Signal processing",
+      "label": "Signal processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "Signal processing"
+    }
+  },
+  {
+    "data": {
+      "id": "filtering",
+      "label": "filtering"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "filtering"
+    }
+  },
+  {
+    "data": {
+      "id": "Fourier Transform",
+      "label": "Fourier Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "Fourier Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "sampling"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "quantization"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "convolution"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\signal-processing",
+      "target": "correlation"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\transforms\\fourier-transform",
+      "label": "notes\\technology\\transforms\\fourier-transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\fourier-transform",
+      "target": "Fourier Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\fourier-transform",
+      "target": "Fourier Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\fourier-transform",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\fourier-transform",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\fourier-transform",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\transforms\\laplace-transform",
+      "label": "notes\\technology\\transforms\\laplace-transform"
+    }
+  },
+  {
+    "data": {
+      "id": "Laplace Transform",
+      "label": "Laplace Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\laplace-transform",
+      "target": "Laplace Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\laplace-transform",
+      "target": "Laplace Transform"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\transforms\\wavelet-transform",
+      "label": "notes\\technology\\transforms\\wavelet-transform"
+    }
+  },
+  {
+    "data": {
+      "id": "Wavelet Transform",
+      "label": "Wavelet Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\wavelet-transform",
+      "target": "Wavelet Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\wavelet-transform",
+      "target": "Wavelet Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\wavelet-transform",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\wavelet-transform",
+      "target": "Fourier Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\wavelet-transform",
+      "target": "Wavelet Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\wavelet-transform",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\transforms\\z-transform",
+      "label": "notes\\technology\\transforms\\z-transform"
+    }
+  },
+  {
+    "data": {
+      "id": "Z-Transform",
+      "label": "Z-Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\z-transform",
+      "target": "Z-Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\z-transform",
+      "target": "Z-Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\z-transform",
+      "target": "Laplace Transform"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\transforms\\z-transform",
+      "target": "signal-processing"
+    }
+  },
+  {
+    "data": {
+      "id": "notes\\technology\\underwater-acoustics",
+      "label": "notes\\technology\\underwater-acoustics"
+    }
+  },
+  {
+    "data": {
+      "id": "Underwater Acoustics",
+      "label": "Underwater Acoustics"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\underwater-acoustics",
+      "target": "Underwater Acoustics"
+    }
+  },
+  {
+    "data": {
+      "id": "Underwater acoustics",
+      "label": "Underwater acoustics"
+    }
+  },
+  {
+    "data": {
+      "source": "notes\\technology\\underwater-acoustics",
+      "target": "Underwater acoustics"
+    }
+  },
+  {
+    "data": {
       "id": "README",
       "label": "README"
     }
