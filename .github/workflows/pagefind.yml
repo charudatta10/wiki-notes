@@ -1,0 +1,33 @@
+name: Build Pagefind Index
+
+on:
+  push:
+    branches:
+      - main          # change to 'master' if that's your default branch
+
+jobs:
+  pagefind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install pagefind marked
+
+      - name: Build Pagefind index from markdown
+        run: node build-index.mjs
+
+      - name: Commit pagefind index back to repo
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pagefind/
+          git diff --cached --quiet || git commit -m "chore: rebuild pagefind index"
+          git push
