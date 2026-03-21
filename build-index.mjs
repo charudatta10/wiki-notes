@@ -1,78 +1,108 @@
 // build-index.mjs
-// Reads all .md files in the repo and builds a pagefind/ search index.
-// Run with: node build-index.mjs
+// Run with: bun build-index.mjs
 
 import { createIndex } from "pagefind";
 import { readdir, readFile } from "fs/promises";
-import { marked } from "marked";
 import path from "path";
+import { parse } from "marked"; // ✅ fixed import
 
 // ── Config ────────────────────────────────────────────────
-// Folder where your .md files live (relative to this script).
-// If your notes are in the repo root, use "./"
-// If they're in a subfolder like "wiki-notes/", set that here.
-const NOTES_DIR   = "./";
-const SITE_PREFIX = "/wiki-notes/";   // must match config.sitePath in index.html
+const NOTES_DIR   = "./";               // where .md files live
+const SITE_PREFIX = "/wiki-notes/";     // must match your frontend
 const OUTPUT_DIR  = "./pagefind";
 // ─────────────────────────────────────────────────────────
 
+// ✅ Safe recursive directory walk (works in Bun + Windows)
 async function getMdFiles(dir) {
-  const entries = await readdir(dir, { withFileTypes: true, recursive: true });
-  return entries
-    .filter(e => e.isFile() && e.name.endsWith(".md"))
-    .map(e => path.join(e.parentPath ?? e.path, e.name))
-    // exclude node_modules and hidden folders
-    .filter(f => !f.includes("node_modules") && !f.includes("/."));
+  let results = [];
+
+  const entries = await readdir(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+
+    // skip unwanted dirs
+    if (
+      fullPath.includes("node_modules") ||
+      fullPath.includes(".git") ||
+      entry.name.startsWith(".")
+    ) continue;
+
+    if (entry.isDirectory()) {
+      const subFiles = await getMdFiles(fullPath);
+      results = results.concat(subFiles);
+    } else if (entry.isFile() && entry.name.endsWith(".md")) {
+      results.push(fullPath);
+    }
+  }
+
+  return results;
 }
 
 async function main() {
   const { index, errors } = await createIndex({});
 
   if (errors.length) {
-    console.error("Pagefind init errors:", errors);
+    console.error("❌ Pagefind init errors:", errors);
     process.exit(1);
   }
 
   const files = await getMdFiles(NOTES_DIR);
-  console.log(`Found ${files.length} markdown files`);
+  console.log(`📄 Found ${files.length} markdown files\n`);
 
   for (const file of files) {
-    const raw  = await readFile(file, "utf8");
-    const html = await marked.parse(raw);
+    try {
+      const raw = await readFile(file, "utf8");
 
-    // Derive the URL path: strip leading "./" and trailing ".md"
-    let url = file.replace(/^\.\//, "").replace(/\.md$/, "");
-    // README files map to the folder root
-    if (url.endsWith("/README") || url === "README") {
-      url = url.replace(/\/?README$/, "") || "";
-    }
-    url = SITE_PREFIX + url;
+      // ✅ Convert markdown → HTML → clean text
+      const html = await parse(raw);
+      const cleanText = html.replace(/<[^>]+>/g, " ");
 
-    // Extract title from first H1 in the markdown
-    const titleMatch = raw.match(/^#\s+(.+)$/m);
-    const title = titleMatch ? titleMatch[1].trim() : file;
+      // ✅ URL handling (cross-platform)
+      let url = file.replace(/\\/g, "/");     // Windows fix
+      url = url.replace(/^\.\//, "").replace(/\.md$/, "");
 
-    const { errors: addErrors } = await index.addCustomRecord({
-      url,
-      content: html.replace(/<[^>]+>/g, " "),   // strip HTML tags for clean text
-      language: "en",
-      meta: { title },
-    });
+      // README → folder root
+      if (url.endsWith("/README") || url === "README") {
+        url = url.replace(/\/?README$/, "") || "";
+      }
 
-    if (addErrors.length) {
-      console.warn(`  ⚠ skipped ${file}:`, addErrors);
-    } else {
-      console.log(`  ✓ indexed ${url}`);
+      url = SITE_PREFIX + url;
+
+      // ✅ Extract title (first H1)
+      const titleMatch = raw.match(/^#\s+(.+)$/m);
+      const title = titleMatch
+        ? titleMatch[1].trim()
+        : path.basename(file, ".md");
+
+      const { errors: addErrors } = await index.addCustomRecord({
+        url,
+        content: cleanText,
+        language: "en",
+        meta: { title },
+      });
+
+      if (addErrors.length) {
+        console.warn(`⚠️ Skipped ${file}`, addErrors);
+      } else {
+        console.log(`✓ Indexed: ${url}`);
+      }
+
+    } catch (err) {
+      console.error(`❌ Error processing ${file}:`, err.message);
     }
   }
 
-  const { errors: writeErrors } = await index.writeFiles({ outputPath: OUTPUT_DIR });
+  const { errors: writeErrors } = await index.writeFiles({
+    outputPath: OUTPUT_DIR,
+  });
+
   if (writeErrors.length) {
-    console.error("Write errors:", writeErrors);
+    console.error("❌ Write errors:", writeErrors);
     process.exit(1);
   }
 
-  console.log(`\n✅ Pagefind index written to ${OUTPUT_DIR}/`);
+  console.log(`\n✅ Pagefind index written to: ${OUTPUT_DIR}/`);
 }
 
 main();
