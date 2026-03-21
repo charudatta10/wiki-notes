@@ -10,10 +10,8 @@
   <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@5.1.1/marked.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- ✅ FIX 1: Use relative paths so they resolve correctly on GitHub Pages /wiki-notes/ -->
-  <link href="pagefind/pagefind-ui.css" rel="stylesheet">
-  <script src="pagefind/pagefind-ui.js"></script>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js"></script>
 </head>
 
 <!-- USER CONFIG -->
@@ -213,18 +211,11 @@
   }
   #docs-footer a { color: white; text-decoration: underline; }
 
-  /* ✅ FIX 3: Search bar styling — positioned in content flow, below navbar */
-  #search {
-    max-width: 50rem;
-    margin: 4.5rem auto 0 auto;
-    padding: 0.75rem 1rem 0 1rem;
-  }
-
   /* ─── Graph toggle button ────────────────────────────── */
   #graph-toggle {
     position: fixed;
     bottom: 1.5rem;
-    right: 5rem;
+    right: 5rem;   /* sits left of graph controls when panel open */
     z-index: 200;
     padding: 0.5rem 1rem;
     background: rgba(10,10,15,0.92);
@@ -257,6 +248,7 @@
   }
   #graph-panel.open { display: flex; }
 
+  /* subtle grid */
   #graph-panel::before {
     content: '';
     position: absolute;
@@ -332,6 +324,7 @@
     flex: 1;
   }
 
+  /* Tooltip */
   #graph-tooltip {
     position: fixed;
     background: rgba(15,15,25,0.95);
@@ -349,6 +342,7 @@
   #graph-tooltip .tip-id   { font-weight: 600; color: #f97316; margin-bottom: 0.25rem; }
   #graph-tooltip .tip-meta { color: #64748b; font-size: 0.65rem; }
 
+  /* Legend */
   #graph-legend {
     position: absolute;
     bottom: 1.5rem; left: 1.5rem;
@@ -371,6 +365,7 @@
   .legend-row   { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
   .legend-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
+  /* Controls */
   #graph-controls {
     position: absolute;
     bottom: 1.5rem; right: 1.5rem;
@@ -398,6 +393,7 @@
     color: #f97316;
   }
 
+  /* Error state */
   #graph-error {
     display: none;
     position: absolute;
@@ -415,9 +411,6 @@
 </style>
 
 <body>
-  <!-- ✅ FIX 3: Search bar placed at top of page, before content, inside body -->
-  <div id="search"></div>
-
   <!-- ── Docs site ─────────────────────────────────────── -->
   <div id="components"></div>
   <div id="content"></div>
@@ -425,7 +418,7 @@
 
   <!-- ── Graph toggle ──────────────────────────────────── -->
   <button id="graph-toggle">⬡ Graph</button>
-
+  <div id="search"></div>
   <!-- ── Graph overlay ─────────────────────────────────── -->
   <div id="graph-panel">
     <div id="graph-header">
@@ -469,7 +462,7 @@
 </body>
 
 <!-- ════════════════════════════════════════════════════════
-     Docs engine
+     Docs engine (from doc 1)
 ═════════════════════════════════════════════════════════ -->
 <script>
   const markedProps = {};
@@ -591,29 +584,23 @@
     await Promise.all((config.components || []).map((c) => loadComponent(c)));
     await loadContent();
     await Promise.all((config.footers || []).map((f) => loadFooter(f)));
-    initGraph();
-
-    // ✅ FIX 2 & 4: Init PagefindUI inside window.onload with correct bundlePath
-    new PagefindUI({
-      element: "#search",
-      showSubResults: true,
-      bundlePath: "/wiki-notes/pagefind/",  // ← explicit path for GitHub Pages subdir
-    });
+    initGraph();  // initialise graph after page load
   };
   window.onhashchange = loadContent;
   if (config.browserRouter) window.onpopstate = loadContent;
 </script>
 
 <!-- ════════════════════════════════════════════════════════
-     Graph engine
+     Graph engine (from doc 2)
 ═════════════════════════════════════════════════════════ -->
 <script>
+  // ── Panel open/close ──────────────────────────────────
   const graphPanel   = document.getElementById('graph-panel');
   const graphToggle  = document.getElementById('graph-toggle');
   const graphClose   = document.getElementById('graph-close');
   const tooltip      = document.getElementById('graph-tooltip');
 
-  let cyInstance = null;
+  let cyInstance = null;   // lazily initialised
   let graphReady = false;
 
   graphToggle.addEventListener('click', () => {
@@ -627,12 +614,14 @@
     tooltip.style.display = 'none';
   });
 
+  // Close on Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') graphClose.click();
   });
 
+  // ── Graph init ────────────────────────────────────────
   function initGraph() {
-    // lazy-loaded on first open
+    // nothing — lazy-loaded on first open
   }
 
   function loadGraph() {
@@ -646,6 +635,7 @@
       .then(data => {
         graphReady = true;
 
+        // Degree map
         const degreeMap = {};
         data.forEach(el => {
           if (el.data.source && el.data.target) {
@@ -654,6 +644,7 @@
           }
         });
 
+        // Stats
         const nodeCount = data.filter(e => !e.data.source).length;
         const edgeCount = data.filter(e =>  e.data.source).length;
         const hubNode   = Object.entries(degreeMap).sort((a,b) => b[1]-a[1])[0];
@@ -661,11 +652,13 @@
         document.getElementById('stat-edges').textContent = edgeCount;
         document.getElementById('stat-hub').textContent   = hubNode ? hubNode[0] : '—';
 
+        // Color helpers
         const nodeColor = id => {
           const d = degreeMap[id] || 0;
           return d >= 4 ? '#a855f7' : d >= 2 ? '#f97316' : '#fde047';
         };
 
+        // Cytoscape
         cyInstance = cytoscape({
           container: document.getElementById('foam-graph'),
           elements: data,
@@ -730,6 +723,7 @@
 
         const cy = cyInstance;
 
+        // Hover
         cy.on('mouseover', 'node', evt => {
           const node = evt.target;
           const id   = node.id();
@@ -762,6 +756,7 @@
           tooltip.style.top  = (rect.top  + pos.y - 14) + 'px';
         });
 
+        // Click → navigate into docs (uses browserRouter-aware path)
         cy.on('tap', 'node', evt => {
           const id   = evt.target.id();
           const path = config.browserRouter ? `/${id}` : `${config.sitePath}${id}`;
@@ -770,6 +765,7 @@
           loadContent();
         });
 
+        // Controls
         document.getElementById('btn-fit').addEventListener('click',
           () => cy.fit(undefined, 40));
         document.getElementById('btn-zoom-in').addEventListener('click',
@@ -783,6 +779,13 @@
         document.getElementById('graph-error').style.display = 'block';
       });
   }
+
+  
+new PagefindUI({
+    element: "#search",
+    showSubResults: true
+});
+
 </script>
 
 </html>
