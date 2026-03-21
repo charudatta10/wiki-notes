@@ -1,15 +1,39 @@
+set shell := ["pwsh", "-NoLogo", "-Command"]
 
 serve:
-    # Use Python's built-in HTTP server
     python -m http.server 8000
 
 build:
-    echo "Building the site..."
-    # Example: bun run build or npm run build
+    just graph
+    just search
 
 clean:
-    echo "Cleaning..."
-    rm -rf dist build *.log
+    Write-Host "Cleaning..."
+    Remove-Item -Recurse -Force dist, build, pagefind, *.log -ErrorAction SilentlyContinue
 
 graph:
     bun run generate-graph.ts
+
+search:
+    bun build-index.mjs
+
+push:
+    #! pwsh
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $hasChanges = git status --porcelain
+
+    if (-not $hasChanges) {
+        Write-Host "No changes to commit"
+        exit 0
+    }
+
+    $diffSummary = git diff --stat | Select-Object -Last 1
+    $msg = "$ts - $diffSummary"
+
+    git add .
+    git commit -m "$msg"
+    git push
+
+deploy:
+    just build
+    just push
