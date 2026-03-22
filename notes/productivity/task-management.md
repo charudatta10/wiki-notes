@@ -1,12 +1,12 @@
-# [[Task Management]]
+# [Task Management](Task Management.md)
 
-[[Task management]] is the process of managing a task through its life cycle. It involves planning, testing, tracking, and reporting.
+[Task management](Task management.md) is the process of managing a task through its life cycle. It involves planning, testing, tracking, and reporting.
 
-Popular [[task-management]] systems include:
+Popular [task-management](task-management.md) systems include:
 
 *   **Getting Things Done (GTD):** A method for organizing and tracking tasks and projects.
 *   **The Eisenhower Matrix:** A framework for prioritizing tasks based on urgency and importance.
 *   **Kanban:** A visual system for managing work as it moves through a process.
 
 ---
-See also: [[note-taking]], [[productivity]]
+See also: [note-taking](note-taking.md), [productivity](productivity.md)

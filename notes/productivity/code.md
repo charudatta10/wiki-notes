@@ -1,3 +1,3 @@
-# [[CODE Method]]
+# [CODE Method](CODE Method.md)
 
-The [[CODE Method]] (Capture, Organize, Distill, Express) is a framework for building a second brain, also developed by Tiago Forte. It outlines a process for taking [[note-taking]], organizing them, extracting key insights, and then using that knowledge to create new work.
+The [CODE Method](CODE Method.md) (Capture, Organize, Distill, Express) is a framework for building a second brain, also developed by Tiago Forte. It outlines a process for taking [note-taking](note-taking.md), organizing them, extracting key insights, and then using that knowledge to create new work.

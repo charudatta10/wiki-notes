@@ -1,6 +1,6 @@
-# [[P2P Journal Idea]]
+# [P2P Journal Idea](P2P Journal Idea.md)
 
-This document outlines an idea for a [[p2p-journal]] system.
+This document outlines an idea for a [p2p-journal](p2p-journal.md) system.
 
 ## Core Concepts
 
@@ -13,4 +13,4 @@ This document outlines an idea for a [[p2p-journal]] system.
 *   **Federated Machine Learning:** Utilize federated machine learning for tasks like plagiarism detection and finding suitable reviewers without centralizing data.
 
 ---
-See also: [[decentralized-identity]]
+See also: [decentralized-identity](decentralized-identity.md)

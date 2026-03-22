@@ -1,3 +1,3 @@
-# [[Correlation]]
+# [Correlation](Correlation.md)
 
-[[Correlation]] is a measure of the similarity between two [[signal-processing]] as a function of the time lag applied to one of them. It's often used to detect a known [[signal-processing]] in a noisy environment, to measure time delays, or to identify patterns. Cross-[[correlation]] measures the similarity between two different [[signal-processing]], while auto-[[correlation]] measures the similarity of a [[signal-processing]] with a delayed version of itself.
+[Correlation](Correlation.md) is a measure of the similarity between two [signal-processing](signal-processing.md) as a function of the time lag applied to one of them. It's often used to detect a known [signal-processing](signal-processing.md) in a noisy environment, to measure time delays, or to identify patterns. Cross-[correlation](correlation.md) measures the similarity between two different [signal-processing](signal-processing.md), while auto-[correlation](correlation.md) measures the similarity of a [signal-processing](signal-processing.md) with a delayed version of itself.

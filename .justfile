@@ -37,4 +37,6 @@ push:
 deploy:
     just build
     just push
+link:
+    bun run convert-wiki-links.ts
     

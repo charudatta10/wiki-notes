@@ -19,7 +19,7 @@
     just serve
     ```
 
-4. Start writing `.md` notes and linking them with `[[wikilinks]]`.
+4. Start writing `.md` notes and linking them with `[wikilinks](wikilinks.md)`.
 
 ## What is Foam?
 
@@ -40,7 +40,7 @@ Raito is a data access management platform that helps you manage and govern acce
 
 ## Example Wikilink
 
-This note links to [[foam-guide]] and [[about]].
+This note links to [foam-guide](foam-guide.md) and [about](about.md).
 
 ## justfile Commands
 

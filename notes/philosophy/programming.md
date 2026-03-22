@@ -1,6 +1,6 @@
-# [[My Programming Philosophy]]
+# [My Programming Philosophy](My Programming Philosophy.md)
 
-My [[programming philosophy]] is rooted in four core principles:
+My [programming philosophy](programming philosophy.md) is rooted in four core principles:
 
 *   **Minimal:** Keep it as simple as possible. Avoid unnecessary complexity and features.
 *   **Simple:** The code should be easy to understand and read.
@@ -8,4 +8,4 @@ My [[programming philosophy]] is rooted in four core principles:
 *   **Powerful:** Despite its simplicity, the code should be effective and capable.
 
 ---
-See also: [[epistemology]]
+See also: [epistemology](epistemology.md)
